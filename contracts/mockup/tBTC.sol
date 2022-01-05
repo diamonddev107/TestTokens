@@ -141,14 +141,14 @@ library SafeMath {
 }
 
 
-contract dBTC  is Context, IBEP20 {
+contract tBTC  is Context, IBEP20 {
   using SafeMath for uint256;
 
   mapping (address => uint256) private _balances;
 
   mapping (address => mapping (address => uint256)) private _allowances;
 
-  address admindBTC;
+  address admintBTC;
   uint256 private _totalSupply;
   uint8 private _decimals;
   string private _symbol;
@@ -158,13 +158,13 @@ contract dBTC  is Context, IBEP20 {
   event Approval(address indexed owner, address indexed spender, uint256 value);
 
   constructor(address admin_) {
-    admindBTC = admin_;
+    admintBTC = admin_;
     _name = "Bitcoin";
     _symbol = "BTC.t";
     _decimals = 8;
     _totalSupply = 2100000000000000;
     // _balances[msg.sender] = _totalSupply;
-    _mint(admindBTC, 500000000000000);
+    _mint(admintBTC, 500000000000000);
 
     emit Transfer(address(0), msg.sender, _totalSupply);
   }
@@ -173,7 +173,7 @@ contract dBTC  is Context, IBEP20 {
    * @dev Returns the Bitcoin token owner.
    */
   function getOwner() external view returns (address) {
-    return admindBTC;
+    return admintBTC;
   }
 
   /**
@@ -354,7 +354,7 @@ contract dBTC  is Context, IBEP20 {
    */
   function _mint(address account, uint256 amount) internal {
     require(account != address(0), "Bitcoin: mint to the zero address");
-    require(account == admindBTC, "Only Admin can mint");
+    require(account == admintBTC, "Only Admin can mint");
 
     _totalSupply = _totalSupply.add(amount);
     _balances[account] = _balances[account].add(amount);
